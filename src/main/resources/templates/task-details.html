@@ -1,0 +1,78 @@
+<!doctype html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/main.html"
+      xmlns:th="http://www.thymeleaf.org">
+<div layout:fragment="content" class="mt-2">
+    <div>
+        <div class="row  justify-content-between">
+            <div class="card col-12 mt-3">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h2 th:text="${task.title}"></h2>
+                    </div>
+                    <div class="mt-2">
+                        <p th:text="${task.description}"></p>
+                        <button style="margin-left: 10px" class="btn btn-sm btn-danger" data-toggle="modal"
+                                data-target="#removeCategoryModal">Delete Task
+                        </button>
+                        <div class="modal fade " id="removeCategoryModal" tabindex="-1" role="dialog"
+                             aria-labelledby="removeCategoryModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <form id="removeCategoryForm" class="modal-content" th:action="@{'/delete/task/' +${task.id}}" method="post">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title " id="removeCategoryModalLabel">DELETE TASK</h5>
+                                        <button style="border: none" type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">x</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group col-12" id="modal-body-data">
+                                            <label > Do you want to remove task ? </label>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+                                        <button  type="submit" class="btn btn-danger">DELETE</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <button style="margin-left: 10px" class="btn btn-sm btn-success" data-toggle="modal"
+                                data-target="#editStatusModal">Edit Status
+                        </button>
+                        <div class="modal fade " id="editStatusModal" tabindex="-1" role="dialog"
+                             aria-labelledby="removeCategoryModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <form id="editStatusModalForm" class="modal-content" th:action="@{'/task/change/status/' +${task.id}}" method="post">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title " id="editStatusModalLabel">EDIT STATUS TASK</h5>
+                                        <button style="border: none" type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">x</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group col-12">
+                                            <label > Status: </label>
+                                            <select class="form-control" name="status">
+                                                <option th:selected="${task.status == 0}" value="0">TODO</option>
+                                                <option th:selected="${task.status == 1}" value="1">IN TEST</option>
+                                                <option th:selected="${task.status == 2}" value="2">DONE</option>
+                                                <option th:selected="${task.status == 3}" value="3">FAILED</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+                                        <button  type="submit" class="btn btn-danger">EDIT</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
